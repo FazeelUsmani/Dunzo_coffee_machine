@@ -203,11 +203,11 @@ class Machine:
                 print(beverage.getName()+" has been prepared")
 
     
-    def run(self):
+    async def run(self):
         """ This method starts num_outlets number of threads which can make a beverage in parallell. """
         with concurrent.futures.ThreadPoolExecutor(max_workers=self.num_outlets) as executor:
             for index in range(self.num_outlets):
-                executor.submit(self.make_beverage)
+                executor.submit(await self.make_beverage)
 
     
     def refill(self, ingredient_name, new_quantity):
